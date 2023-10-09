@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Score Updates</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Live Score Updates</h1>
+        <ul id="scoreList"></ul>
+        
+    </div>
+    <a href="update.html">Update Score</a>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.min.js"></script>
+   <script>
+
+document.addEventListener('DOMContentLoaded', () => {
+    const socket = io();
+  
+    socket.on('updateScores', scores => {
+      const scoreList = document.getElementById('scoreList');
+      scoreList.innerHTML = '';
+  
+      scores.forEach(score => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${score.team}: ${score.score}`;
+        scoreList.appendChild(listItem);
+      });
+    });
+  
+    
+  });
+  
+   </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Score Updates</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+
+        <div>
+            <label for="cars">Choose a Team:</label>
+            <select name="cars" id="teamInput">
+                <option value="Team A">Team A</option>
+                <option value="Team B">Team B</option>
+              </select>
+            <input type="number" id="pointsInput" placeholder="Points">
+            <button id="updateScoreButton">Update Score</button>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.min.js"></script>
+    <script >
+        document.addEventListener('DOMContentLoaded', () => {
+            const socket = io();
+          
+            
+          
+            document.getElementById('updateScoreButton').addEventListener('click', () => {
+              const team = document.getElementById('teamInput').value;
+              const points = parseInt(document.getElementById('pointsInput').value, 10);
+          
+              if (team && !isNaN(points)) {
+                socket.emit('updateScore', { team, points });
+              }
+            });
+          });
+          
+        
+        
+            </script>
+</body>
+</html>
